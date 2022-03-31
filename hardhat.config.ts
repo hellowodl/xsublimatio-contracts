@@ -7,7 +7,10 @@ import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
 import 'solidity-coverage';
 import 'hardhat-gas-reporter';
+import 'hardhat-deploy';
 
+const LOCALHOST_PRIVATE_KEY = process.env.LOCALHOST_PRIVATE_KEY;
+const LOCALHOST_ADDRESS = process.env.LOCALHOST_ADDRESS;
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
 const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY! || '0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'; // well known private key
 
@@ -39,9 +42,17 @@ const config: HardhatUserConfig = {
             },
         },
     },
+    namedAccounts: {
+        deployer: {
+            default: LOCALHOST_ADDRESS
+        }
+    },
     networks: {
         hardhat: {},
-        localhost: {},
+        localhost: {
+	        url: 'http://127.0.0.1:7545',
+	        accounts: [LOCALHOST_PRIVATE_KEY]
+	    },
         rinkeby: {
             url: `https://rinkeby.infura.io/v3/${INFURA_API_KEY}`,
             accounts: [RINKEBY_PRIVATE_KEY],
