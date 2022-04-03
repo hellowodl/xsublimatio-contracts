@@ -9,8 +9,8 @@ import 'solidity-coverage';
 import 'hardhat-gas-reporter';
 import 'hardhat-deploy';
 
-const LOCALHOST_PRIVATE_KEY = process.env.LOCALHOST_PRIVATE_KEY;
-const LOCALHOST_ADDRESS = process.env.LOCALHOST_ADDRESS;
+const LOCALHOST_PRIVATE_KEY = process.env.LOCALHOST_PRIVATE_KEY as string;
+const LOCALHOST_ADDRESS = process.env.LOCALHOST_ADDRESS as string;
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
 const RINKEBY_PRIVATE_KEY = process.env.RINKEBY_PRIVATE_KEY! || '0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'; // well known private key
 
@@ -50,7 +50,7 @@ const config: HardhatUserConfig = {
     networks: {
         hardhat: {},
         localhost: {
-	        url: 'http://127.0.0.1:7545',
+	        url: 'http://127.0.0.1:8545',
 	        accounts: [LOCALHOST_PRIVATE_KEY]
 	    },
         rinkeby: {
